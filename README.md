@@ -58,7 +58,7 @@ Here's the promised one liner:
 cordova plugin add tcg.cordova.openwith \
   --variable ANDROID_MIME_TYPE="image/*" \
   --variable IOS_URL_SCHEME=tcgopenwithdemo \
-  --variable IOS_UNIFORM_TYPE_IDENTIFIER=public.image
+  --variable IOS_UNIFORM_TYPE_IDENTIFIER=public.vcard
 ```
 
 | variable | example | notes |

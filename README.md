@@ -89,6 +89,25 @@ You might also have to select a Team for both the App and Share Extension target
 
 Build, XCode might complain about a few things to setup that it will fix for you (creation entitlements files, etc).
 
+
+We also need to specify the attachments coming in from the extension item by adding this NSExtensionActivationRule in share extension target's plist file.
+
+<key>NSExtensionAttributes</key>
+		<dict>
+            <key>NSExtensionActivationRule</key>
+            <string>
+                SUBQUERY (
+                extensionItems, $extensionItem,
+                SUBQUERY (
+                $extensionItem.attachments, $attachment,
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.vcard" ||
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.plain-text" ||
+                ANY $attachment.registeredTypeIdentifiers UTI-CONFORMS-TO "public.image"
+                ).@count == 1
+                ).@count > 0
+            </string>
+        </dict>
+
 ### Advanced installation options
 
 If you do not need anything fancy, you can skip this section.
